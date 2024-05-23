@@ -15,8 +15,13 @@ def mitternachtsformel():
     except ValueError:
         print("Fail")
 
+
+
+
 def zins_formel():
-    choice = int(input("Was gesucht?\n\tStartkapital(1)\n\tEndkapital(2)\n\tZinssatz(3)\n\tJahre(4)\nEingabe:"))
+    choice = int(input("Was gesucht?\n\tStartkapital(1)\n\tEndkapital(2)\n\tZinssatz(3)\n\tJahre(4)\n\tDegressive "
+                       "Abschreibung(5)\nEingabe: "))
+    unterjaehrige_verzinsung = input("Unterjährige Verzinsung? (ja/nein): ")
     quest = ["Startkapital: ", "Endkapital: ", "Zinssatz: ", "Jahre: "]
     inputs = []
 
@@ -26,30 +31,47 @@ def zins_formel():
         value = float(input(quest[q]))
         inputs.append(value)
 
+    if unterjaehrige_verzinsung.lower() == "ja":
+        n = int(input("Anzahl der Zinsperioden pro Jahr: "))
+    else:
+        n = 1
+
     if choice == 2:
         Startkapital, Zinssatz, Jahre = inputs
-        Endkapital = Startkapital * (1 + Zinssatz / 100) ** Jahre
+        Endkapital = Startkapital * (1 + (Zinssatz / 100) / n) ** (n * Jahre)
         print(f"Endkapital: {Endkapital}")
     elif choice == 1:
         Endkapital, Zinssatz, Jahre = inputs
-        Startkapital = Endkapital / ((1 + Zinssatz / 100) ** Jahre)
+        Startkapital = Endkapital / ((1 + (Zinssatz / 100) / n) ** (n * Jahre))
         print(f"Startkapital: {Startkapital}")
     elif choice == 3:
         Startkapital, Endkapital, Jahre = inputs
-        Zinssatz = (Endkapital / Startkapital) ** (1 / Jahre) - 1
-        print(f"Zinssatz: {Zinssatz * 100}%")
+        Zinssatz = n * ((Endkapital / Startkapital) ** (1 / (n * Jahre)) - 1) * 100
+        print(f"Zinssatz: {Zinssatz}%")
     elif choice == 4:
         Startkapital, Endkapital, Zinssatz = inputs
-        Jahre = (math.log(Endkapital / Startkapital) / math.log(1 + Zinssatz / 100))
+        Jahre = math.log(Endkapital / Startkapital) / (n * math.log(1 + (Zinssatz / 100) / n))
         print(f"Jahre: {round(Jahre, 2)}")
+    elif choice == 5:
+        Anschaffungswert = float(input("Anschaffungswert: "))
+        Abschreibungsprozentsatz = float(input("Abschreibungsprozentsatz: "))
+        Nutzungsdauer = int(input("Nutzungsdauer (Jahre): "))
+        for jahr in range(1, Nutzungsdauer + 1):
+            Abschreibungsbetrag = Anschaffungswert * (Abschreibungsprozentsatz / 100)
+            Anschaffungswert -= Abschreibungsbetrag
+            print(f"Jahr {jahr}: Buchwert = {Anschaffungswert}, Abschreibung = {Abschreibungsbetrag}")
     else:
         print("Ungültige Auswahl.")
 
+    def renten_formel():
+        pass
 
 if __name__ == '__main__':
     print("Willkommen zu den Matheformeln\n")
-    choc = input("Was möchten Sie?\nmitternachtsformel\nzins_formel\n\nEingabe: ")
+    choc = input("Was möchten Sie?\nmitternachtsformel(M)\nzins_formel(Z)\nrenten_formel(R)\n\nEingabe: ")
     if choc == "M":
         mitternachtsformel()
     if choc == "Z":
         zins_formel()
+    if choc == "R":
+        renten_formel()
