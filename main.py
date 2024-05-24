@@ -62,37 +62,39 @@ def zins_formel():
 
 
 def renten_formel():
+    def vorschuessige(inputs):
+        print("squanching")
+
+    def nachschuessig(inputs):
+        if renten_choice == 1:
+            Zinsfaktor, Jahre, Rente = inputs
+            print(f"Endwert: {Rente * ((Zinsfaktor ** Jahre - 1) / (Zinsfaktor - 1))}")
+        elif renten_choice == 2:
+            Zinsfaktor, Jahre, Rente = inputs
+            print(f"Barwert: {Rente * ((Zinsfaktor ** Jahre - 1) / (Zinsfaktor ** Jahre) * (Zinsfaktor - 1))}")
+
     renten_choice = int(input("Was gesucht?\n\tEndwert(1)\n\tBarwert(2)\n\tRente vom Barwert(3)\n\tRente vom Endwert("
                               "4)\n\tJahre(5)\nEingabe: "))
     vorschuessig = input("Vorschüssig? (Ja/Nein): ")
-    quest = ["Endwert: ", "Barwert: ", "Rente: ", "Jahre: "]
-    inputs = []
 
+    quest = ["Zinsfaktor: ", "Jahre: "]
+    if renten_choice in (1, 2, 5):
+        quest.append("Rente: ")
+    elif renten_choice == 3:
+        quest.append("Barwert: ")
+    elif renten_choice == 4:
+        quest.append("Endwert: ")
+
+    inputs = []
+    print(len(quest))
     for q in range(len(quest)):
-        if q + 1 == renten_choice:
-            continue
         value = float(input(quest[q]))
         inputs.append(value)
 
-    if vorschuessig.lower() == "Ja":
-        n = int(input("Anzahl der Zinsperioden pro Jahr: "))
+    if vorschuessig.lower() == "ja":
+        vorschuessige(inputs)
     else:
-        print("Es wird nachschüssig automatisch benutzt")
-        n = 1
-
-    def vorschuessig():
-        pass
-
-
-
-    def nachschuessig():
-        Rente, Zinsfaktor, Jahre = inputs
-        print(f"Endwert: {Rente * ((Zinsfaktor ** Jahre - 1) / (Zinsfaktor - 1))}")
-
-
-        print(f"Barwert: {Rente * ((Zinsfaktor ** Jahre - 1) / (Zinsfaktor ** Jahre) *  (Zinsfaktor - 1))}")
-
-
+        nachschuessig(inputs)
 
 
 if __name__ == '__main__':
