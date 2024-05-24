@@ -90,6 +90,10 @@ def renten_formel():
         print(f"Endwert: {Rente * ((Zinsfaktor ** Jahre - 1) / (Zinsfaktor - 1))}")
 
 
+        print(f"Barwert: {Rente * ((Zinsfaktor ** Jahre - 1) / (Zinsfaktor ** Jahre) *  (Zinsfaktor - 1))}")
+
+
+
 
 if __name__ == '__main__':
     print("Willkommen zu den Mathe formeln\n")
