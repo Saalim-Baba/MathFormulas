@@ -51,13 +51,12 @@ def zins_formel():
         Jahre = math.log(Endkapital / Startkapital) / (n * math.log(1 + (Zinssatz / 100) / n))
         print(f"Jahre: {round(Jahre, 2)}")
     elif choice == 5:
-        Anschaffungswert = float(input("Anschaffungswert: "))
+        Startkapital, Jahre = inputs
         Abschreibungsprozentsatz = float(input("Abschreibungsprozentsatz: "))
-        Nutzungsdauer = int(input("Nutzungsdauer (Jahre): "))
-        for jahr in range(1, Nutzungsdauer + 1):
-            Abschreibungsbetrag = Anschaffungswert * (Abschreibungsprozentsatz / 100)
-            Anschaffungswert -= Abschreibungsbetrag
-            print(f"Jahr {jahr}: Buchwert = {Anschaffungswert}, Abschreibung = {Abschreibungsbetrag}")
+        for jahr in range(1, Jahre + 1):
+            Abschreibungsbetrag = Startkapital * (Abschreibungsprozentsatz / 100)
+            Startkapital -= Abschreibungsbetrag
+            print(f"Jahr {jahr}: Buchwert = {Startkapital}, Abschreibung = {Abschreibungsbetrag}")
     else:
         print("Ungültige Auswahl.")
 
@@ -87,7 +86,8 @@ def renten_formel():
 
 
     def nachschuessig():
-        pass
+        Rente, Zinsfaktor, Jahre = inputs
+        print(f"Endwert: {Rente * ((Zinsfaktor ** Jahre - 1) / (Zinsfaktor - 1))}")
 
 
 
