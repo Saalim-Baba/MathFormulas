@@ -63,31 +63,40 @@ def zins_formel():
 
 
 def renten_formel():
-    choice = int(input("Was gesucht?\n\tEndwert(1)\n\tBarwert(2)\n\tRente vom Barwert(3)\n\tRente vom Endwert("
-                       "4)\n\tJahre(5)\nEingabe: "))
-    vorschuessig = input(" vorschüssig? (ja/nein): ")
-    quest = ["Startkapital: ", "Endkapital: ", "Zinssatz: ", "Jahre: "]
+    renten_choice = int(input("Was gesucht?\n\tEndwert(1)\n\tBarwert(2)\n\tRente vom Barwert(3)\n\tRente vom Endwert("
+                              "4)\n\tJahre(5)\nEingabe: "))
+    vorschuessig = input("Vorschüssig? (Ja/Nein): ")
+    quest = ["Endwert: ", "Barwert: ", "Rente: ", "Jahre: "]
     inputs = []
 
     for q in range(len(quest)):
-        if q + 1 == choice:
+        if q + 1 == renten_choice:
             continue
         value = float(input(quest[q]))
         inputs.append(value)
 
-    if vorschuessig.lower() == "ja":
+    if vorschuessig.lower() == "Ja":
         n = int(input("Anzahl der Zinsperioden pro Jahr: "))
     else:
         print("Es wird nachschüssig automatisch benutzt")
         n = 1
 
+    def vorschuessig():
+        pass
+
+
+
+    def nachschuessig():
+        pass
+
+
 
 if __name__ == '__main__':
     print("Willkommen zu den Mathe formeln\n")
-    choc = input("Was möchten Sie?\nmitternachtsformel(M)\nzins_formel(Z)\nrenten_formel(R)\n\nEingabe: ")
-    if choc == "M":
+    choice = input("Was möchten Sie?\nMitternachtsformel(M)\nZins_formel(Z)\nRenten_formel(R)\n\nEingabe: ")
+    if choice == "M":
         mitternachtsformel()
-    if choc == "Z":
+    if choice == "Z":
         zins_formel()
-    if choc == "R":
+    if choice == "R":
         renten_formel()
