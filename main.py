@@ -62,13 +62,8 @@ def zins_formel():
 
 
 def renten_formel():
-    def vorschuessige(inputs):
-        Zinsfaktor, *rest = inputs
-        Zinsfaktor = Zinsfaktor / 100 + 1
-        if renten_choice == 1:
-            print(nachschuessig(inputs, renten_choice) * Zinsfaktor)
 
-    def nachschuessig(inputs, renten_choice):
+    def renten_rechnung(inputs):
         Zinsfaktor, *rest = inputs
         Zinsfaktor = Zinsfaktor / 100 + 1
 
@@ -121,9 +116,9 @@ def renten_formel():
         inputs.append(value)
 
     if vorschuessig.lower() == "ja":
-        vorschuessige(inputs)
+        renten_rechnung(inputs)
     else:
-        nachschuessig(inputs, renten_choice)
+        print(renten_rechnung(inputs))
 
 
 if __name__ == '__main__':
