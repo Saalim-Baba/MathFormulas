@@ -83,17 +83,25 @@ def renten_formel():
 
         elif renten_choice == 3:
             Jahre, Barwert = rest
-            rente_von_barwert = Barwert * ((Zinsfaktor ** Jahre * (Zinsfaktor - 1) / (Zinsfaktor ** Jahre - 1)))
+            if vorschuessig:
+                n = 1
+            rente_von_barwert = Barwert * ((Zinsfaktor ** (Jahre - n) * (Zinsfaktor - 1) / (Zinsfaktor ** Jahre - 1)))
             return rente_von_barwert
 
         elif renten_choice == 4:
             Jahre, Endwert = rest
-            rente_von_endwert = Endwert * ((Zinsfaktor - 1) / (Zinsfaktor ** Jahre - 1))
+            n = 1
+            if vorschuessig:
+                n = Zinsfaktor
+            rente_von_endwert = Endwert * ((Zinsfaktor - 1) / (n * (Zinsfaktor ** Jahre - 1)))
             return rente_von_endwert
 
         elif renten_choice == 5:
             Rente, Endwert = rest
-            Jahre = math.log(((Endwert * (Zinsfaktor - 1)) / Rente) + 1) / math.log(Zinsfaktor)
+            n = 1
+            if vorschuessig:
+                n = Zinsfaktor
+            Jahre = math.log(((Endwert * (Zinsfaktor - 1)) / (n * Rente)) + 1) / math.log(Zinsfaktor)
             return Jahre
 
         else:
