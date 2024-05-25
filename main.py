@@ -62,19 +62,23 @@ def zins_formel():
 
 
 def renten_formel():
-
-    def renten_rechnung(inputs):
+    def renten_rechnung(inputs, vorschuessig=False):
         Zinsfaktor, *rest = inputs
         Zinsfaktor = Zinsfaktor / 100 + 1
+        n = 0
 
         if renten_choice == 1:
             Jahre, Rente = rest
             Endwert = Rente * ((Zinsfaktor ** Jahre - 1) / (Zinsfaktor - 1))
+            if vorschuessig:
+                Endwert = Endwert * Zinsfaktor
             return Endwert
 
         elif renten_choice == 2:
             Jahre, Rente = rest
-            Barwert = Rente * ((Zinsfaktor ** Jahre - 1) / (Zinsfaktor ** Jahre) * (Zinsfaktor - 1))
+            if vorschuessig:
+                n = 1
+            Barwert = Rente * ((Zinsfaktor ** Jahre - 1) / (Zinsfaktor ** (Jahre - n)) * (Zinsfaktor - 1))
             return Barwert
 
         elif renten_choice == 3:
@@ -116,7 +120,7 @@ def renten_formel():
         inputs.append(value)
 
     if vorschuessig.lower() == "ja":
-        renten_rechnung(inputs)
+        renten_rechnung(inputs, True)
     else:
         print(round(renten_rechnung(inputs), 2))
 
