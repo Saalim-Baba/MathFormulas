@@ -128,7 +128,7 @@ def renten_formel():
         inputs.append(value)
 
     if vorschuessig.lower() == "ja":
-        renten_rechnung(inputs, True)
+        print(round(renten_rechnung(inputs, True), 2))
     else:
         print(round(renten_rechnung(inputs), 2))
 
