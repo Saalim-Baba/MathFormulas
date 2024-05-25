@@ -68,10 +68,23 @@ def renten_formel():
     def nachschuessig(inputs):
         if renten_choice == 1:
             Zinsfaktor, Jahre, Rente = inputs
+            Zinsfaktor = Zinsfaktor / 10 + 1
             print(f"Endwert: {Rente * ((Zinsfaktor ** Jahre - 1) / (Zinsfaktor - 1))}")
         elif renten_choice == 2:
             Zinsfaktor, Jahre, Rente = inputs
+            Zinsfaktor = Zinsfaktor / 10 + 1
             print(f"Barwert: {Rente * ((Zinsfaktor ** Jahre - 1) / (Zinsfaktor ** Jahre) * (Zinsfaktor - 1))}")
+        elif renten_choice == 3:
+            Zinsfaktor, Jahre, Barwert = inputs
+            Zinsfaktor = Zinsfaktor / 10 + 1
+            print(f"Rente von Barwert: {Barwert * ((Zinsfaktor ** Jahre * (Zinsfaktor - 1) / (Zinsfaktor ** Jahre - 1)))}")
+        elif renten_choice == 4:
+            Zinsfaktor, Jahre, Endwert = inputs
+            Zinsfaktor = Zinsfaktor / 10 + 1
+            print(f"Rente von Endwert: {Endwert * ((Zinsfaktor - 1) / (Zinsfaktor ** Jahre - 1))}")
+
+
+
 
     renten_choice = int(input("Was gesucht?\n\tEndwert(1)\n\tBarwert(2)\n\tRente vom Barwert(3)\n\tRente vom Endwert("
                               "4)\n\tJahre(5)\nEingabe: "))
