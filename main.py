@@ -63,29 +63,42 @@ def zins_formel():
 
 def renten_formel():
     def vorschuessige(inputs):
-        print("squanching")
-
-    def nachschuessig(inputs):
+        Zinsfaktor, *rest = inputs
+        Zinsfaktor = Zinsfaktor / 100 + 1
         if renten_choice == 1:
-            Zinsfaktor, Jahre, Rente = inputs
-            Zinsfaktor = Zinsfaktor / 100 + 1
-            print(f"Endwert: {round(Rente * ((Zinsfaktor ** Jahre - 1) / (Zinsfaktor - 1)), 2)}")
+            print(nachschuessig(inputs, renten_choice) * Zinsfaktor)
+
+    def nachschuessig(inputs, renten_choice):
+        Zinsfaktor, *rest = inputs
+        Zinsfaktor = Zinsfaktor / 100 + 1
+
+        if renten_choice == 1:
+            Jahre, Rente = rest
+            Endwert = Rente * ((Zinsfaktor ** Jahre - 1) / (Zinsfaktor - 1))
+            return round(Endwert, 2)
+
         elif renten_choice == 2:
-            Zinsfaktor, Jahre, Rente = inputs
-            Zinsfaktor = Zinsfaktor / 100 + 1
-            print(f"Barwert: {round(Rente * ((Zinsfaktor ** Jahre - 1) / (Zinsfaktor ** Jahre) * (Zinsfaktor - 1)), 2)}")
+            Jahre, Rente = rest
+            Barwert = Rente * ((Zinsfaktor ** Jahre - 1) / (Zinsfaktor ** Jahre) * (Zinsfaktor - 1))
+            return round(Barwert, 2)
+
         elif renten_choice == 3:
-            Zinsfaktor, Jahre, Barwert = inputs
-            Zinsfaktor = Zinsfaktor / 100 + 1
-            print(f"Rente von Barwert: {round(Barwert * ((Zinsfaktor ** Jahre * (Zinsfaktor - 1) / (Zinsfaktor ** Jahre - 1))), 2)}")
+            Jahre, Barwert = rest
+            rente_von_barwert = Barwert * ((Zinsfaktor ** Jahre * (Zinsfaktor - 1) / (Zinsfaktor ** Jahre - 1)))
+            return round(rente_von_barwert, 2)
+
         elif renten_choice == 4:
-            Zinsfaktor, Jahre, Endwert = inputs
-            Zinsfaktor = Zinsfaktor / 100 + 1
-            print(f"Rente von Endwert: {round(Endwert * ((Zinsfaktor - 1) / (Zinsfaktor ** Jahre - 1)), 2)}")
+            Jahre, Endwert = rest
+            rente_von_endwert = Endwert * ((Zinsfaktor - 1) / (Zinsfaktor ** Jahre - 1))
+            return round(rente_von_endwert, 2)
+
         elif renten_choice == 5:
-            Zinsfaktor, Rente, Endwert = inputs
-            Zinsfaktor = Zinsfaktor / 100 + 1
-            print(f"Jahre: {round(math.log(((Endwert * (Zinsfaktor - 1)) / Rente) + 1) / math.log(Zinsfaktor), 2)}")
+            Rente, Endwert = rest
+            Jahre = math.log(((Endwert * (Zinsfaktor - 1)) / Rente) + 1) / math.log(Zinsfaktor)
+            return round(Jahre, 2)
+
+        else:
+            return "Fail"
 
     renten_choice = int(input("Was gesucht?\n\tEndwert(1)\n\tBarwert(2)\n\tRente vom Barwert(3)\n\tRente vom Endwert("
                               "4)\n\tJahre(5)\nEingabe: "))
@@ -110,7 +123,7 @@ def renten_formel():
     if vorschuessig.lower() == "ja":
         vorschuessige(inputs)
     else:
-        nachschuessig(inputs)
+        nachschuessig(inputs, renten_choice)
 
 
 if __name__ == '__main__':
