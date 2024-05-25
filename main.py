@@ -70,27 +70,27 @@ def renten_formel():
         if renten_choice == 1:
             Jahre, Rente = rest
             Endwert = Rente * ((Zinsfaktor ** Jahre - 1) / (Zinsfaktor - 1))
-            return round(Endwert, 2)
+            return Endwert
 
         elif renten_choice == 2:
             Jahre, Rente = rest
             Barwert = Rente * ((Zinsfaktor ** Jahre - 1) / (Zinsfaktor ** Jahre) * (Zinsfaktor - 1))
-            return round(Barwert, 2)
+            return Barwert
 
         elif renten_choice == 3:
             Jahre, Barwert = rest
             rente_von_barwert = Barwert * ((Zinsfaktor ** Jahre * (Zinsfaktor - 1) / (Zinsfaktor ** Jahre - 1)))
-            return round(rente_von_barwert, 2)
+            return rente_von_barwert
 
         elif renten_choice == 4:
             Jahre, Endwert = rest
             rente_von_endwert = Endwert * ((Zinsfaktor - 1) / (Zinsfaktor ** Jahre - 1))
-            return round(rente_von_endwert, 2)
+            return rente_von_endwert
 
         elif renten_choice == 5:
             Rente, Endwert = rest
             Jahre = math.log(((Endwert * (Zinsfaktor - 1)) / Rente) + 1) / math.log(Zinsfaktor)
-            return round(Jahre, 2)
+            return Jahre
 
         else:
             return "Fail"
@@ -118,7 +118,7 @@ def renten_formel():
     if vorschuessig.lower() == "ja":
         renten_rechnung(inputs)
     else:
-        print(renten_rechnung(inputs))
+        print(round(renten_rechnung(inputs), 2))
 
 
 if __name__ == '__main__':
