@@ -68,34 +68,37 @@ def renten_formel():
     def nachschuessig(inputs):
         if renten_choice == 1:
             Zinsfaktor, Jahre, Rente = inputs
-            Zinsfaktor = Zinsfaktor / 10 + 1
-            print(f"Endwert: {Rente * ((Zinsfaktor ** Jahre - 1) / (Zinsfaktor - 1))}")
+            Zinsfaktor = Zinsfaktor / 100 + 1
+            print(f"Endwert: {round(Rente * ((Zinsfaktor ** Jahre - 1) / (Zinsfaktor - 1)), 2)}")
         elif renten_choice == 2:
             Zinsfaktor, Jahre, Rente = inputs
-            Zinsfaktor = Zinsfaktor / 10 + 1
-            print(f"Barwert: {Rente * ((Zinsfaktor ** Jahre - 1) / (Zinsfaktor ** Jahre) * (Zinsfaktor - 1))}")
+            Zinsfaktor = Zinsfaktor / 100 + 1
+            print(f"Barwert: {round(Rente * ((Zinsfaktor ** Jahre - 1) / (Zinsfaktor ** Jahre) * (Zinsfaktor - 1)), 2)}")
         elif renten_choice == 3:
             Zinsfaktor, Jahre, Barwert = inputs
-            Zinsfaktor = Zinsfaktor / 10 + 1
-            print(f"Rente von Barwert: {Barwert * ((Zinsfaktor ** Jahre * (Zinsfaktor - 1) / (Zinsfaktor ** Jahre - 1)))}")
+            Zinsfaktor = Zinsfaktor / 100 + 1
+            print(f"Rente von Barwert: {round(Barwert * ((Zinsfaktor ** Jahre * (Zinsfaktor - 1) / (Zinsfaktor ** Jahre - 1))), 2)}")
         elif renten_choice == 4:
             Zinsfaktor, Jahre, Endwert = inputs
-            Zinsfaktor = Zinsfaktor / 10 + 1
-            print(f"Rente von Endwert: {Endwert * ((Zinsfaktor - 1) / (Zinsfaktor ** Jahre - 1))}")
-
-
-
+            Zinsfaktor = Zinsfaktor / 100 + 1
+            print(f"Rente von Endwert: {round(Endwert * ((Zinsfaktor - 1) / (Zinsfaktor ** Jahre - 1)), 2)}")
+        elif renten_choice == 5:
+            Zinsfaktor, Rente, Endwert = inputs
+            Zinsfaktor = Zinsfaktor / 100 + 1
+            print(f"Jahre: {round(math.log(((Endwert * (Zinsfaktor - 1)) / Rente) + 1) / math.log(Zinsfaktor), 2)}")
 
     renten_choice = int(input("Was gesucht?\n\tEndwert(1)\n\tBarwert(2)\n\tRente vom Barwert(3)\n\tRente vom Endwert("
                               "4)\n\tJahre(5)\nEingabe: "))
     vorschuessig = input("Vorschüssig? (Ja/Nein): ")
 
     quest = ["Zinsfaktor: ", "Jahre: "]
+    if renten_choice == 5:
+        quest.remove("Jahre: ")
     if renten_choice in (1, 2, 5):
         quest.append("Rente: ")
-    elif renten_choice == 3:
+    if renten_choice == 3:
         quest.append("Barwert: ")
-    elif renten_choice == 4:
+    if renten_choice in (4, 5):
         quest.append("Endwert: ")
 
     inputs = []
