@@ -19,4 +19,4 @@ The MathFormulas repository contains various mathematical formulas that were dis
 ## How to Use
 1. Clone the repository:
    ```sh
-   git clone https://github.com/milaasHD/MathFormulas.git
+   git clone https://github.com/Saalim-Baba/MathFormulas.git
